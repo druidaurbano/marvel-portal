@@ -1,0 +1,33 @@
+.footer-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  column-gap: 3%;
+
+  button {
+    width: 7%;
+    padding:  10px;
+    border: none;
+    background-color: #EC1D24;
+    color: #FFFFFF;
+    clip-path: polygon(
+      0.5em 0%,
+      100% 0,
+      100% calc(100% - 0.5em),
+      calc(100% - 0.5em) 100%,
+      0 100%,
+      0% 0.5em
+    );
+    text-transform: uppercase;
+    //font-weight: 500;
+    &:hover {
+      background-color: #FFFFFF;
+      color: #EC1D24;
+    }
+    &.selected {
+      background-color: #000000;
+      color: #FFFFFF;
+      cursor: not-allowed;
+    }
+  }
+}

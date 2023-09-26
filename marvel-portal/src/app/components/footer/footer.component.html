@@ -1,0 +1,8 @@
+<div class="footer-container">
+  <button *ngFor="let item of buttonList"
+          class="red-button"
+          id="{{item.id}}-footer"
+          (click)="goTo(item)">
+    {{item.name}}
+  </button>
+</div>

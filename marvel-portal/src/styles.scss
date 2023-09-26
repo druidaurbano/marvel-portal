@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* .red-button {
+  padding:  10px;
+  border: none;
+  background-color: #EC1D24;
+  color: #FFFFFF;
+  clip-path: polygon(
+    0.6em 0%,
+    100% 0,
+    100% calc(100% - 0.5em),
+    calc(100% - 0.5em) 100%,
+    0 100%,
+    0% 0.5em
+  );
+} */
+
+/* .white-button {
+  color: #EC1D24;
+  background-color: #FFFFFF;
+} */

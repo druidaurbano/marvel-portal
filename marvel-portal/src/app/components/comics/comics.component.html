@@ -1,0 +1,11 @@
+<div class="comics-container">
+  <ul class="comics-list">
+    <li *ngFor="let comic of comicsList" class="comics-item">
+      <button class="comics-button">
+        <img src="{{comic.thumbnail}}" alt="" class="comics-thumbnail">
+      </button>
+      <span class="comics-title">{{comic.title}}</span>
+      <span class="comics-year">{{comic.date}}</span>
+    </li>
+  </ul>
+</div>
