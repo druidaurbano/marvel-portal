@@ -1,1 +1,8 @@
-<div class="creators-container">creators</div>
+<div class="creators-container">
+  <ul class="creators-list">
+    <button *ngFor="let creator of creatorsList" class="creators-item">
+      <img src="{{creator.thumbnail}}" alt="" class="creators-thumbnail">
+      <span class="creators-name">{{creator.fullName}}</span>
+    </button>
+  </ul>
+</div>

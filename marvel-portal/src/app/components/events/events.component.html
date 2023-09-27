@@ -1,1 +1,11 @@
-<div class="events-container">events</div>
+<div class="events-container">
+  <ul class="events-list">
+    <li *ngFor="let event of eventsList" class="events-item">
+      <button class="events-button">
+        <img src="{{event.thumbnail}}" alt="" class="events-thumbnail">
+      </button>
+      <span class="events-title">{{event.title}}</span>
+      <span class="events-year">{{event.start}} - {{event.end}}</span>
+    </li>
+  </ul>
+</div>

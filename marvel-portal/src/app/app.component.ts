@@ -11,7 +11,7 @@ export class AppComponent {
 
   title = 'marvel-portal';
   constructor() {
-    this.step.name = 'quadrinhos';
+    this.step.name = 'criadores';
   }
 
   ngOnChanges(changes: SimpleChanges) {

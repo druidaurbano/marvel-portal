@@ -1,1 +1,8 @@
-<div class="characters-container">Characters</div>
+<div class="characters-container">
+  <ul class="characters-list">
+    <button *ngFor="let character of charactersList" class="characters-item">
+      <img src="{{character.thumbnail}}" alt="" class="characters-thumbnail">
+      <span class="characters-name">{{character.name}}</span>
+    </button>
+  </ul>
+</div>

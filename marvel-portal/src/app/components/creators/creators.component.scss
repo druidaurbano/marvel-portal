@@ -1,5 +1,41 @@
 .creators-container {
   width: 100%;
   height: 100%;
-  background-color: blueviolet;
+  padding: 10px 30px 0 30px;
+
+  .creators-list {
+    width: 100%;
+    padding: 0;
+    column-gap: 1%;
+    row-gap: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .creators-item {
+      width: 192px;
+      //list-style: none;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      padding: 0;
+      row-gap: 10px;
+      border: none;
+      background: #EC1D24;
+
+      .creators-thumbnail {
+        width: 100%;
+        height: 100%;
+      }
+
+      .creators-name {
+        width: 100%;
+        text-align: center;
+        background: #000;
+        color: #FFF;
+        padding: 10px 0;
+      }
+    }
+  }
 }
