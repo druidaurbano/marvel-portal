@@ -8,6 +8,7 @@ import { ComicsModule } from './components/comics/comics.module';
 import { EventsModule } from './components/events/events.module';
 import { CreatorsModule } from './components/creators/creators.module';
 import { CharactersModule } from './components/characters/characters.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CharactersModule } from './components/characters/characters.module';
     ComicsModule,
     EventsModule,
     CreatorsModule,
-    CharactersModule
+    CharactersModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
