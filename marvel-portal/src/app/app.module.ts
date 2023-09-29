@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +9,9 @@ import { EventsModule } from './components/events/events.module';
 import { CreatorsModule } from './components/creators/creators.module';
 import { CharactersModule } from './components/characters/characters.module';
 import { HttpClientModule } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt'
+registerLocaleData(localePT);
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { DatePipe } from '@angular/common';
     CharactersModule,
     HttpClientModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, { provide: LOCALE_ID, useValue: 'pt-br'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

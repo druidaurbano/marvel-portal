@@ -1,4 +1,4 @@
-import { DatePipe, formatDate } from '@angular/common';
+//import { DatePipe, formatDate } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Comic } from 'src/app/models/comic.model';
@@ -14,7 +14,7 @@ export class ComicsComponent {
 
   constructor(
     private apiMarvel: ApiMarvelService,
-    public datePipe: DatePipe
+    //public datePipe: DatePipe
   ) {
     /* this.comicsList = [
       {

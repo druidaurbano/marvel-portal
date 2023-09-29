@@ -23,7 +23,6 @@ export class ApiMarvelService {
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
-    /* let comics = this.http.get<any>(`${this.apiMarvelUrl}/characters?ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`); */
     return this.http.get<any>(`${this.apiMarvelUrl}/characters?ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 

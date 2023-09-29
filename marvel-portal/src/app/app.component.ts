@@ -20,7 +20,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.getCharacters();
-    this.getComics();
+    //this.getComics();
     this.getCreators();
     this.getEvents();
   }
@@ -42,13 +42,13 @@ export class AppComponent {
     });
   }
 
-  getComics() {
+  /* getComics() {
     this.apiService.getComics().subscribe((data: any[]) => {
       this.posts = data;
       console.log('show me data from Comics', data);
       //console.log('show me the posts', this.posts);
     });
-  }
+  } */
 
   getCreators() {
     this.apiService.getCreators().subscribe((data: any[]) => {
