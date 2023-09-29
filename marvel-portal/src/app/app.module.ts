@@ -9,6 +9,7 @@ import { EventsModule } from './components/events/events.module';
 import { CreatorsModule } from './components/creators/creators.module';
 import { CharactersModule } from './components/characters/characters.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     CharactersModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
