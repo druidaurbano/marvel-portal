@@ -10,12 +10,13 @@ import { CreatorsModule } from './components/creators/creators.module';
 import { CharactersModule } from './components/characters/characters.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe, registerLocaleData } from '@angular/common';
-import localePT from '@angular/common/locales/pt'
+import localePT from '@angular/common/locales/pt';
+import { DetailsModule } from './components/details/details.module';
 registerLocaleData(localePT);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +28,7 @@ registerLocaleData(localePT);
     CreatorsModule,
     CharactersModule,
     HttpClientModule,
+    DetailsModule
   ],
   providers: [DatePipe, { provide: LOCALE_ID, useValue: 'pt-br'}],
   bootstrap: [AppComponent]

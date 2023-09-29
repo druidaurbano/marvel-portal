@@ -14,6 +14,7 @@ export class ApiMarvelService {
   publicKey = 'dbcb35bc44466328d022b755596ef8be';
   privateKey = 'bf57ddc3fa543723cd9f18f0c9257716d22fb269';
   hash: any = '';
+  limit: number = 50;
 
   constructor(
     private http: HttpClient
@@ -23,28 +24,28 @@ export class ApiMarvelService {
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
-    return this.http.get<any>(`${this.apiMarvelUrl}/characters?ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+    return this.http.get<any>(`${this.apiMarvelUrl}/characters?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
   getComics(): Observable<any[]> {
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
-    return this.http.get<any>(`${this.apiMarvelUrl}/comics?ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+    return this.http.get<any>(`${this.apiMarvelUrl}/comics?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
   getCreators(): Observable<any[]> {
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
-    return this.http.get<any>(`${this.apiMarvelUrl}/creators?ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+    return this.http.get<any>(`${this.apiMarvelUrl}/creators?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
   getEvents(): Observable<any[]> {
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
-    return this.http.get<any>(`${this.apiMarvelUrl}/events?ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+    return this.http.get<any>(`${this.apiMarvelUrl}/events?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
 

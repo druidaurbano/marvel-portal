@@ -1,0 +1,24 @@
+.details-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 2% 20%;
+  column-gap: 2%;
+  //background-color: rebeccapurple;
+
+  .image-details-section {
+    max-width: 400px;
+    img {
+      width: 100%;
+    }
+  }
+
+  .text-details-section {
+    padding-right: 10%;
+    .text-writer-penciler {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+    }
+  }
+}

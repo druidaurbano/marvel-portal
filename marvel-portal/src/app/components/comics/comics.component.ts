@@ -116,4 +116,8 @@ export class ComicsComponent {
       //console.log('show me the posts', this.posts);
     });
   }
+
+  openComic(comic: any) {
+    console.log('comic clicada', comic);
+  }
 }

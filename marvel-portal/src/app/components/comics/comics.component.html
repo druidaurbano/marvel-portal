@@ -1,6 +1,6 @@
 <div class="comics-container">
   <ul class="comics-list">
-    <li *ngFor="let comic of comicsList" class="comics-item">
+    <li *ngFor="let comic of comicsList" class="comics-item" (click)="openComic(comic)">
       <button class="comics-button">
         <img src="{{comic.thumbnail}}" alt="" class="comics-thumbnail">
       </button>
