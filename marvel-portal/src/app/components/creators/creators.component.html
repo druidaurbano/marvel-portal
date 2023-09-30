@@ -1,8 +1,10 @@
 <div class="creators-container">
-  <ul class="creators-list">
-    <button *ngFor="let creator of creatorsList" class="creators-item">
+  <ul *ngIf="creatorStep === 'list'" class="creators-list">
+    <button *ngFor="let creator of creatorsList" class="creators-item" (click)="openCreator(creator)">
       <img src="{{creator.thumbnail}}" alt="" class="creators-thumbnail">
       <span class="creators-name">{{creator.fullName}}</span>
     </button>
   </ul>
+
+  <app-details *ngIf="creatorStep === 'details'" (changeStep)="goBack()" [details]="creator"></app-details>
 </div>

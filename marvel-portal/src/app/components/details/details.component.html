@@ -1,11 +1,14 @@
 <div class="details-container">
+
+  <button class="go-back" (click)="goBack()">Go Back</button>
+
   <section class="image-details-section">
-    <img src="../../../assets/teste.jpg">
+    <img src="{{details.thumbnail}}">
   </section>
 
   <section class="text-details-section">
     <span class="text-title">
-      Immortal Thor (2023) #2
+      {{details.title}}
     </span>
 
     <span class="text-published">

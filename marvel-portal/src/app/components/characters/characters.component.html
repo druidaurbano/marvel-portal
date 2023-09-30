@@ -1,8 +1,10 @@
 <div class="characters-container">
-  <ul class="characters-list">
-    <button *ngFor="let character of charactersList" class="characters-item">
+  <ul *ngIf="characterStep === 'list'" class="characters-list">
+    <button *ngFor="let character of charactersList" class="characters-item" (click)="openCharacter(character)">
       <img src="{{character.thumbnail}}" alt="" class="characters-thumbnail">
       <span class="characters-name">{{character.name}}</span>
     </button>
   </ul>
+
+  <app-details *ngIf="characterStep === 'details'" (changeStep)="goBack()" [details]="character"></app-details>
 </div>

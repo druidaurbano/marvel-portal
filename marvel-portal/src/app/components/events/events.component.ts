@@ -9,6 +9,8 @@ import { ApiMarvelService } from 'src/app/services/api-marvel.service';
 })
 export class EventsComponent {
   eventsList: Array<Event> = [];
+  eventStep: 'list' | 'details' = 'list';
+  event: any;
 
   constructor(
     private apiMarvel: ApiMarvelService
@@ -71,6 +73,28 @@ export class EventsComponent {
         this.eventsList.push(event);
       }
     });
+  }
+
+  getEvent(id: number) {
+    this.apiMarvel.getEventById(id).subscribe((data: any) => {
+      console.log('show me the data from event', data);
+      let event = data.data.results[0];
+      this.event = {
+        thumbnail: `${event.thumbnail.path}.${event.thumbnail.extension}`,
+        title: event.title
+      }
+    });
+  }
+
+  openEvent(event: any) {
+    console.log('event clicado', event);
+    this.eventStep = 'details';
+    this.getEvent(event.id);
+  }
+
+  goBack() {
+    this.eventStep = 'list';
+    this.event = {};
   }
 
 }

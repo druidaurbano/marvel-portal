@@ -9,6 +9,8 @@ import { Creator } from 'src/app/models/creator.model';
 })
 export class CreatorsComponent {
   creatorsList: Array<Creator> = [];
+  creatorStep: 'list' | 'details' = 'list';
+  creator: any;
 
   constructor(
     private apiMarvel: ApiMarvelService
@@ -64,5 +66,35 @@ export class CreatorsComponent {
         this.creatorsList.push(creator);
       }
     });
+  }
+
+  getCreator(id: number) {
+    console.log('getting creator id:', id);
+    //let comic = this.apiMarvel.getComicsById(id);
+    this.apiMarvel.getCreatorById(id).subscribe((data: any) => {
+      console.log('show me the data from creator', data);
+      let creator = data.data.results[0];
+      this.creator = {
+        thumbnail: `${creator.thumbnail.path}.${creator.thumbnail.extension}`,
+        title: creator.title
+      }
+    });
+    //console.log('show me the comic', comic);
+  }
+
+  openCreator(creator: any) {
+    console.log('comic clicada', creator);
+    /* this.openDetailsComic.emit({
+      type: 'comic',
+      element: comic
+    }); */
+    this.creatorStep = 'details';
+    this.getCreator(creator.id);
+    //this.router.navigate(['/details']);
+  }
+
+  goBack() {
+    this.creatorStep = 'list';
+    this.creator = {};
   }
 }

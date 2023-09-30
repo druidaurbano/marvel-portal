@@ -38,7 +38,7 @@ export class FooterComponent implements OnInit {
     console.log('goTo clicado', item.name);
     this.sendStep.emit({
       event: event,
-      footerStep: item.name
+      step: item.name
     });
     this.unselectButton();
     this.selectButton(item.id);

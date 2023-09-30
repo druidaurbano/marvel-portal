@@ -1,6 +1,6 @@
 <div class="events-container">
-  <ul class="events-list">
-    <li *ngFor="let event of eventsList" class="events-item">
+  <ul *ngIf="eventStep === 'list'" class="events-list">
+    <li *ngFor="let event of eventsList" class="events-item" (click)="openEvent(event)">
       <button class="events-button">
         <img src="{{event.thumbnail}}" alt="" class="events-thumbnail">
       </button>
@@ -8,4 +8,6 @@
       <span class="events-year">{{event.start | date: 'mediumDate'}} - {{event.end | date: 'mediumDate'}}</span>
     </li>
   </ul>
+
+  <app-details *ngIf="eventStep === 'details'" (changeStep)="goBack()" [details]="event"></app-details>
 </div>

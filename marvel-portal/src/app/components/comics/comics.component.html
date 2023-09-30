@@ -1,5 +1,5 @@
 <div class="comics-container">
-  <ul class="comics-list">
+  <ul *ngIf="comicStep === 'list'" class="comics-list">
     <li *ngFor="let comic of comicsList" class="comics-item" (click)="openComic(comic)">
       <button class="comics-button">
         <img src="{{comic.thumbnail}}" alt="" class="comics-thumbnail">
@@ -8,4 +8,6 @@
       <span class="comics-year">{{comic.date}}</span>
     </li>
   </ul>
+
+  <app-details *ngIf="comicStep === 'details'" (changeStep)="goBack()" [details]="comic"></app-details>
 </div>

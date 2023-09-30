@@ -9,6 +9,8 @@ import { ApiMarvelService } from 'src/app/services/api-marvel.service';
 })
 export class CharactersComponent {
   charactersList: Array<Character> = [];
+  characterStep: 'list' | 'details' = 'list';
+  character: any;
 
   constructor(
     private apiMarvel: ApiMarvelService
@@ -66,5 +68,35 @@ export class CharactersComponent {
       }
       //console.log('show me the posts', this.posts);
     });
+  }
+
+  getCharacter(id: number) {
+    console.log('getting character id:', id);
+    //let comic = this.apiMarvel.getComicsById(id);
+    this.apiMarvel.getCharacterById(id).subscribe((data: any) => {
+      console.log('show me the data from character', data);
+      let character = data.data.results[0];
+      this.character = {
+        thumbnail: `${character.thumbnail.path}.${character.thumbnail.extension}`,
+        title: character.title
+      }
+    });
+    //console.log('show me the comic', comic);
+  }
+
+  openCharacter(character: any) {
+    console.log('character clicada', character);
+    /* this.openDetailsComic.emit({
+      type: 'comic',
+      element: comic
+    }); */
+    this.characterStep = 'details';
+    this.getCharacter(character.id);
+    //this.router.navigate(['/details']);
+  }
+
+  goBack() {
+    this.characterStep = 'list';
+    this.character = {};
   }
 }

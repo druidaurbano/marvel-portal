@@ -1,6 +1,7 @@
 //import { DatePipe, formatDate } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Comic } from 'src/app/models/comic.model';
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
 
@@ -10,10 +11,14 @@ import { ApiMarvelService } from 'src/app/services/api-marvel.service';
   styleUrls: ['./comics.component.scss']
 })
 export class ComicsComponent {
+  @Output() openDetailsComic = new EventEmitter<any>();
   comicsList: Array<Comic> = [];
+  comicStep: 'list' | 'details' = 'list';
+  comic: any;
 
   constructor(
     private apiMarvel: ApiMarvelService,
+    private router: Router
     //public datePipe: DatePipe
   ) {
     /* this.comicsList = [
@@ -119,5 +124,31 @@ export class ComicsComponent {
 
   openComic(comic: any) {
     console.log('comic clicada', comic);
+    /* this.openDetailsComic.emit({
+      type: 'comic',
+      element: comic
+    }); */
+    this.comicStep = 'details';
+    this.getComic(comic.id);
+    //this.router.navigate(['/details']);
+  }
+
+  getComic(id: number) {
+    console.log('getting comic id:', id);
+    //let comic = this.apiMarvel.getComicsById(id);
+    this.apiMarvel.getComicById(id).subscribe((data: any) => {
+      console.log('show me the data from comic', data);
+      let comic = data.data.results[0];
+      this.comic = {
+        thumbnail: `${comic.thumbnail.path}.${comic.thumbnail.extension}`,
+        title: comic.title
+      }
+    });
+    //console.log('show me the comic', comic);
+  }
+
+  goBack() {
+    this.comicStep = 'list';
+    this.comic = {};
   }
 }
