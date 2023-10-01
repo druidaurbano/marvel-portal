@@ -1,6 +1,6 @@
 <app-header (sendStep)="changeStep($event)"></app-header>
 
-<main *ngIf="step.name === 'home'">Main</main>
+<main *ngIf="step.name === 'home'"></main>
 
 <app-comics *ngIf="step.name === 'quadrinhos'" (openDetailsComic)="openDetails($event)"></app-comics>
 
