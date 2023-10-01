@@ -1,34 +1,124 @@
 .header-container {
-  width: 50%;
-  height: 50px;
+  width: 95%;
+  height: 100px;
+  padding: 0 2.5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  column-gap: 1%;
+  //column-gap: 1%;
+  background: #FFF;
 
-  .profile-section {
-    width: 20%;
+  .header-left {
+    width: 40%;
     height: 100%;
-    //background-color: red;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    img {
-      //width: 100%;
-      height: 80%;
-      object-fit: contain;
+    justify-content: space-between;
+    //column-gap: 10%;
+
+    /* button {
+      padding: 0;
+    } */
+
+    .home-button {
+      width: 20%;
+      //margin-right: 10%;
+      color: #000000;
+      column-gap: 10%;
+      img {
+        width: 40%;
+        height: 100%;
+      }
+      span {
+        width: 40%;
+      }
+    }
+
+    .button-list {
+      width: 75%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      .page-button {
+        width: 25%;
+        color: #D3D3D3;
+        &.selected {
+          color: #580B0E;
+        }
+        &:hover {
+          color: #580B0E;
+        }
+      }
+      .bottom-slide {
+        width: 25%;
+        height: 3px;
+        position: absolute;
+        background: #580B0E;
+        bottom: 0;
+        left: 0;
+        border-radius: 5%;
+        transition: all .75s ease-out;
+        display: none;
+        &.selected {
+          display: flex;
+        }
+      }
+    }
+
+    .home-button, .page-button {
+      padding: 0;
+      height: 100%;
+      border: none;
+      background: none;
+      text-transform: uppercase;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    &:after {
+
     }
   }
 
-  .search-section {
-    width: 60%;
+  .header-center {
+    width: 30%;
     input {
       width: 100%;
     }
   }
 
-  .member-section {
+  .header-right {
     width: 20%;
+    display: flex;
+    justify-content: flex-end;
+
+    .member-button {
+      width: 20%;
+    }
+
+    .profile-button {
+      width: 20%;
+      height: 100%;
+      //background-color: red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 100%;
+        height: 80%;
+        object-fit: contain;
+      }
+    }
   }
 }
+
+/* .selected {
+  color: #580B0E;
+} */

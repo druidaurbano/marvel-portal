@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header (sendStep)="changeStep($event)"></app-header>
 
 <main *ngIf="step.name === 'home'">Main</main>
 
@@ -12,4 +12,4 @@
 
 <app-details *ngIf="step.name === 'details'" [details]="details" (sendStep)="changeStep($event)"></app-details>
 
-<app-footer (sendStep)="changeStep($event)"></app-footer>
+<!-- <app-footer (sendStep)="changeStep($event)"></app-footer> -->

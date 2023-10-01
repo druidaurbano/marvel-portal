@@ -1,14 +1,48 @@
 <div class="header-container">
-  <section class="profile-section">
-    <img src="../../../assets/no-profile.png" alt="profile image">
-  </section>
+  <div class="header-left">
+    <button class="home-button" (click)="goTo(homeButton)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Eo_circle_red_letter-m.svg">
+      <span>Portal Marvel</span>
+    </button>
 
-  <section class="search-section">
+    <ul class="button-list">
+      <button *ngFor="let item of buttonList"
+            class="page-button"
+            id="{{item.id}}-header"
+            (click)="goTo(item)">
+        {{item.name}}
+      </button>
+      <div class="bottom-slide" id="slide" [style.left]="leftSlide + '%'"></div>
+    </ul>
+
+  </div>
+
+  <div class="header-center">
+    <input type="text" placeholder="Search">
+  </div>
+
+  <div class="header-right">
+    <button class="member-button">
+      Seja Membro $
+    </button>
+
+    <button class="profile-button">
+      <img src="../../../assets//no-profile.png" alt="profile image">
+      <span>Lucas Corrêa</span>
+      <!-- <select>Opção de logout</select> -->
+    </button>
+  </div>
+
+  <!-- <section class="profile-section">
+    <img src="../../../assets/no-profile.png" alt="profile image">
+  </section> -->
+
+  <!-- <section class="search-section">
     <input type="text" placeholder="Search">
   </section>
 
   <section class="member-section">
     <button>Seja Membro $</button>
-  </section>
+  </section> -->
 </div>
 
