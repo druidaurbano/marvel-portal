@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CharactersComponent } from './characters.component';
 import { DetailsModule } from '../details/details.module';
+import { LoadingModule } from '../loading/loading.module';
 
 
 
@@ -9,7 +10,8 @@ import { DetailsModule } from '../details/details.module';
   declarations: [CharactersComponent],
   imports: [
     CommonModule,
-    DetailsModule
+    DetailsModule,
+    LoadingModule
   ],
   exports: [CharactersComponent]
 })

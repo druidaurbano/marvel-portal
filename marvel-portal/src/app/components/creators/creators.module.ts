@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreatorsComponent } from './creators.component';
 import { DetailsModule } from '../details/details.module';
+import { LoadingModule } from '../loading/loading.module';
 
 
 
@@ -9,7 +10,8 @@ import { DetailsModule } from '../details/details.module';
   declarations: [CreatorsComponent],
   imports: [
     CommonModule,
-    DetailsModule
+    DetailsModule,
+    LoadingModule
   ],
   exports: [CreatorsComponent]
 })

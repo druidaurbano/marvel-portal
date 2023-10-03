@@ -11,6 +11,7 @@ export class CreatorsComponent {
   creatorsList: Array<Creator> = [];
   creatorStep: 'list' | 'details' = 'list';
   creator: any;
+  loading: boolean = false;
 
   constructor(
     private apiMarvel: ApiMarvelService
@@ -54,7 +55,9 @@ export class CreatorsComponent {
   }
 
   getCreators() {
+    this.loading = true;
     this.apiMarvel.getCreators().subscribe((data: any) => {
+      this.loading = false;
       console.log('show me the data inside events', data.data?.results);
       for(let item of data.data?.results) {
         let creator: Creator = {

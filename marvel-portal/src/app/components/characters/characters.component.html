@@ -7,4 +7,6 @@
   </ul>
 
   <app-details *ngIf="characterStep === 'details'" (changeStep)="goBack()" [details]="character"></app-details>
+
+  <app-loading *ngIf="loading"></app-loading>
 </div>

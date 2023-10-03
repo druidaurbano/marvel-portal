@@ -10,4 +10,6 @@
   </ul>
 
   <app-details *ngIf="eventStep === 'details'" (changeStep)="goBack()" [details]="event"></app-details>
+
+  <app-loading *ngIf="loading"></app-loading>
 </div>

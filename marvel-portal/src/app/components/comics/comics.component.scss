@@ -1,7 +1,8 @@
 .comics-container {
   width: 100%;
   height: 100%;
-  padding-left: 30px;
+  padding: 30px;
+  background: rgba(0, 0, 0, .9);
 
   .comics-list {
     width: 100%;
@@ -12,6 +13,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 
     .comics-item {
       width: 192px;
@@ -25,7 +27,7 @@
 
       .comics-button {
         width: 100%;
-        height: 100%;
+        height: 313px;
         padding: 0;
 
         .comics-thumbnail {
@@ -33,6 +35,18 @@
           height: 100%;
         }
       }
+
+      .comics-title {
+        color: #FFFFFF;
+      }
+      .comics-year {
+        color: #FFFFFF;
+      }
     }
   }
 }
+
+/* .app-looading {
+  width: 100vw;
+  height: 100vh;
+} */

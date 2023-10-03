@@ -15,6 +15,7 @@ export class ComicsComponent {
   comicsList: Array<Comic> = [];
   comicStep: 'list' | 'details' = 'list';
   comic: any;
+  loading: boolean = false;
 
   constructor(
     private apiMarvel: ApiMarvelService,
@@ -102,7 +103,9 @@ export class ComicsComponent {
   }
 
   getComics() {
+    this.loading = true;
     this.apiMarvel.getComics().subscribe((data: any) => {
+      this.loading = false;
       //debugger;
       console.log('show me the data inside comics component', data.data?.results);
       console.log('show me the data results', data.results);
