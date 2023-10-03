@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Character } from 'src/app/models/character.model';
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
+import { CharactersService } from 'src/app/services/characters.service';
 
 @Component({
   selector: 'app-characters',
@@ -14,7 +15,8 @@ export class CharactersComponent {
   loading: boolean = false;
 
   constructor(
-    private apiMarvel: ApiMarvelService
+    private apiMarvel: ApiMarvelService,
+    private charactersService: CharactersService
   ) {
     /* this.charactersList = [
       {
@@ -56,6 +58,11 @@ export class CharactersComponent {
 
   getCharacters() {
     this.loading = true;
+    if(this.charactersService.charactersArray.length > 0) {
+      this.charactersList = this.charactersService.charactersArray;
+      this.loading = false;
+      return;
+    }
     this.apiMarvel.getCharacters().subscribe((data: any) => {
       this.loading = false;
       console.log('show me the data inside comics component', data.data?.results);
@@ -65,10 +72,11 @@ export class CharactersComponent {
           name: item.name,
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
         };
-
+        this.charactersService.addToCharactersList(character);
         console.log('show me the character', character);
-        this.charactersList.push(character);
+        //this.charactersList.push(character);
       }
+      this.charactersList = this.charactersService.charactersArray;
       //console.log('show me the posts', this.posts);
     });
   }

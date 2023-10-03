@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Comic } from 'src/app/models/comic.model';
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
+import { ComicsService } from 'src/app/services/comics.service';
 
 @Component({
   selector: 'app-comics',
@@ -19,7 +20,8 @@ export class ComicsComponent {
 
   constructor(
     private apiMarvel: ApiMarvelService,
-    private router: Router
+    private router: Router,
+    private comicsService: ComicsService
     //public datePipe: DatePipe
   ) {
     /* this.comicsList = [
@@ -104,6 +106,12 @@ export class ComicsComponent {
 
   getComics() {
     this.loading = true;
+    console.log('length de copmicsList', this.comicsService.comicsArray.length);
+    if(this.comicsService.comicsArray.length > 0) {
+      this.comicsList = this.comicsService.comicsArray;
+      this.loading = false;
+      return;
+    }
     this.apiMarvel.getComics().subscribe((data: any) => {
       this.loading = false;
       //debugger;
@@ -116,10 +124,9 @@ export class ComicsComponent {
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`,
           date: item.title.match(/\(\d{4}\)/)
         };
-
-        console.log('show me the comic', comic);
-        this.comicsList.push(comic);
+        this.comicsService.addToComicsList(comic);
       }
+      this.comicsList = this.comicsService.comicsArray;
       console.log('show me data from Comics', data);
       //console.log('show me the posts', this.posts);
     });

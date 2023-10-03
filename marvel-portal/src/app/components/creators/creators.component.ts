@@ -1,6 +1,7 @@
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
 import { Component } from '@angular/core';
 import { Creator } from 'src/app/models/creator.model';
+import { CreatorsService } from 'src/app/services/creators.service';
 
 @Component({
   selector: 'app-creators',
@@ -14,7 +15,8 @@ export class CreatorsComponent {
   loading: boolean = false;
 
   constructor(
-    private apiMarvel: ApiMarvelService
+    private apiMarvel: ApiMarvelService,
+    private creatorsService: CreatorsService
   ) {
     /* this.creatorsList = [
       {
@@ -56,6 +58,11 @@ export class CreatorsComponent {
 
   getCreators() {
     this.loading = true;
+    if(this.creatorsService.creatorsArray.length > 0) {
+      this.creatorsList = this.creatorsService.creatorsArray;
+      this.loading = false;
+      return;
+    }
     this.apiMarvel.getCreators().subscribe((data: any) => {
       this.loading = false;
       console.log('show me the data inside events', data.data?.results);
@@ -65,9 +72,11 @@ export class CreatorsComponent {
           fullName: item.fullName,
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
         }
+        this.creatorsService.addToCreatorsList(creator);
         console.log('show me the creator', creator);
-        this.creatorsList.push(creator);
+        //this.creatorsList.push(creator);
       }
+      this.creatorsList = this.creatorsService.creatorsArray;
     });
   }
 

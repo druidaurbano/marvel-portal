@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Event } from 'src/app/models/event.model';
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
+import { EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-events',
@@ -14,7 +15,8 @@ export class EventsComponent {
   loading: boolean = false;
 
   constructor(
-    private apiMarvel: ApiMarvelService
+    private apiMarvel: ApiMarvelService,
+    private eventsService: EventsService
   ) {
     /* this.eventsList = [
       {
@@ -61,6 +63,11 @@ export class EventsComponent {
 
   getEvents() {
     this.loading = true;
+    if(this.eventsService.eventsArray.length > 0) {
+      this.eventsList = this.eventsService.eventsArray;
+      this.loading = false;
+      return;
+    }
     this.apiMarvel.getEvents().subscribe((data: any) => {
       this.loading = false;
       console.log('show me the data inside events', data.data?.results);
@@ -72,9 +79,11 @@ export class EventsComponent {
           end: item.end,
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
         }
+        this.eventsService.addToEventsList(event);
         console.log('show me the event', event);
-        this.eventsList.push(event);
+        //this.eventsList.push(event);
       }
+      this.eventsList = this.eventsService.eventsArray;
     });
   }
 

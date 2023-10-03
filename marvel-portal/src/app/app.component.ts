@@ -17,6 +17,7 @@ export class AppComponent {
     private apiService: ApiMarvelService
   ) {
     this.step.name = 'home';
+    //this.step.name = 'quadrinhos';
   }
 
   ngOnInit() {

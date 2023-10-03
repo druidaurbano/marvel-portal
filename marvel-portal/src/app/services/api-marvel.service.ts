@@ -32,6 +32,9 @@ export class ApiMarvelService {
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/comics?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+    /* this.http.get<any>(`${this.apiMarvelUrl}/comics?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`).subscribe((data: any) => {
+      for(let item of data.data)
+    }); */
   }
 
   getCreators(): Observable<any[]> {

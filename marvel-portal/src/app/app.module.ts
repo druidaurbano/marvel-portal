@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { DetailsModule } from './components/details/details.module';
+import { LoadingModule } from './components/loading/loading.module';
 registerLocaleData(localePT);
 
 @NgModule({
@@ -28,7 +29,8 @@ registerLocaleData(localePT);
     CreatorsModule,
     CharactersModule,
     HttpClientModule,
-    DetailsModule
+    DetailsModule,
+    LoadingModule
   ],
   providers: [DatePipe, { provide: LOCALE_ID, useValue: 'pt-br'}],
   bootstrap: [AppComponent]
