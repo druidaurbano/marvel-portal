@@ -1,5 +1,5 @@
 //import { DatePipe, formatDate } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Comic } from 'src/app/models/comic.model';
@@ -14,6 +14,7 @@ import { ComicsService } from 'src/app/services/comics.service';
 })
 export class ComicsComponent {
   @Output() openDetailsComic = new EventEmitter<any>();
+  @Input() comicSearching: any;
   comicsList: Array<Comic> = [];
   comicStep: 'list' | 'details' = 'list';
   comic: any;
@@ -106,6 +107,12 @@ export class ComicsComponent {
     this.getComics();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('show me the changes', changes)
+    if(changes['comicSearching'].currentValue)
+      this.searchComic(changes['comicSearching'].currentValue)
+  }
+
   getComics(scroll?: boolean) {
     this.loading = true;
     if(this.comicsService.comicsArray.length > 0 && !scroll) {
@@ -156,6 +163,29 @@ export class ComicsComponent {
         description:  comic.textObjects[0].text
       }
     });
+  }
+
+  searchComic(c: string) {
+    console.log('procurando por ... ', c);
+    this.comicsList = [];
+    this.comicsService.resetComicsList();
+    this.loading = true;
+    this.apiMarvel.searchComics(c).subscribe((data: any) => {
+      console.log('show me the results', data.data.results[0]);
+      this.loading = false;
+      for(let item of data.data?.results) {
+        let comic: Comic = {
+          id: item.id,
+          title: item.title,
+          thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+          date: item.title.match(/\(\d{4}\)/)
+        };
+        this.comicsService.addToComicsList(comic);
+        console.log('show me the character', comic);
+        //this.charactersList.push(character);
+      }
+      this.comicsList = this.comicsService.comicsArray;
+    })
   }
 
   goBack() {

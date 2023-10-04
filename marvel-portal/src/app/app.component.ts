@@ -1,6 +1,7 @@
 import { Component, SimpleChanges } from '@angular/core';
 import { StepHome } from './models/step.model';
 import { ApiMarvelService } from './services/api-marvel.service';
+import { Search } from './models/search.model';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,11 @@ export class AppComponent {
   step: StepHome = {name: 'home'};
   posts: any[] = [];
   details: any;
+  search: any;
 
   title = 'marvel-portal';
   constructor(
-    private apiService: ApiMarvelService
+    private marvelService: ApiMarvelService
   ) {
     this.step.name = 'home';
     //this.step.name = 'quadrinhos';
@@ -38,6 +40,28 @@ export class AppComponent {
     this.details = e.element.id;
   }
 
-
+  searchStuff(stuff: Search) {
+    console.log('show me the stuff', stuff);
+    switch(stuff.id) {
+      case 0:
+        console.log('procurando em quadrinhos...');
+        this.search = stuff.text;
+        break;
+      case 1:
+        console.log('procurando em eventos...');
+        this.search = stuff.text;
+        break;
+      case 2:
+        console.log('procurando em criadores...');
+        this.search = stuff.text;
+        break;
+      case 3:
+        console.log('procurando em personagens...');
+        this.search = stuff.text;
+        break;
+      default:
+        console.log('procurando em tudo');
+    }
+  }
 
 }

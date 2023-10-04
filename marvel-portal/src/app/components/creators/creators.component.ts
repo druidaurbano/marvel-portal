@@ -1,5 +1,5 @@
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Creator } from 'src/app/models/creator.model';
 import { CreatorsService } from 'src/app/services/creators.service';
 import { Detail } from 'src/app/models/detail.model';
@@ -10,6 +10,7 @@ import { Detail } from 'src/app/models/detail.model';
   styleUrls: ['./creators.component.scss']
 })
 export class CreatorsComponent {
+  @Input() creatorSearching: any;
   creatorsList: Array<Creator> = [];
   creatorStep: 'list' | 'details' = 'list';
   creator: any;
@@ -56,6 +57,12 @@ export class CreatorsComponent {
 
   ngOnInit() {
     this.getCreators();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('show me the changes', changes)
+    if(changes['creatorSearching'].currentValue)
+      this.searchCreator(changes['creatorSearching'].currentValue)
   }
 
   getCreators(scroll?: boolean) {
@@ -115,6 +122,28 @@ export class CreatorsComponent {
     };
     this.getCreator(creator.id);
     //this.router.navigate(['/details']);
+  }
+
+  searchCreator(c: string) {
+    console.log('procurando por ... ', c);
+    this.creatorsList = [];
+    this.creatorsService.resetCreatorsList();
+    this.loading = true;
+    this.apiMarvel.searchCreators(c).subscribe((data: any) => {
+      console.log('show me the results', data.data.results[0]);
+      this.loading = false;
+      for(let item of data.data?.results) {
+        let creator: Creator = {
+          id: item.id,
+          fullName: item.fullName,
+          thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
+        }
+        this.creatorsService.addToCreatorsList(creator);
+        console.log('show me the character', creator);
+        //this.charactersList.push(character);
+      }
+      this.creatorsList = this.creatorsService.creatorsArray;
+    })
   }
 
   goBack() {

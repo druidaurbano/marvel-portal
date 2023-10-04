@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Detail } from 'src/app/models/detail.model';
 import { Event } from 'src/app/models/event.model';
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
@@ -10,6 +10,7 @@ import { EventsService } from 'src/app/services/events.service';
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent {
+  @Input() eventSearching: any;
   eventsList: Array<Event> = [];
   eventStep: 'list' | 'details' = 'list';
   event: any;
@@ -61,6 +62,12 @@ export class EventsComponent {
 
   ngOnInit() {
     this.getEvents();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('show me the changes', changes)
+    if(changes['eventSearching'].currentValue)
+      this.searchEvent(changes['eventSearching'].currentValue)
   }
 
   getEvents(scroll?: boolean) {
@@ -116,6 +123,30 @@ export class EventsComponent {
       title: event.title
     }
     this.getEvent(event.id);
+  }
+
+  searchEvent(event: string) {
+    console.log('procurando por ... ', event);
+    this.eventsList = [];
+    this.eventsService.resetEventsList();
+    this.loading = true;
+    this.apiMarvel.searchEvents(event).subscribe((data: any) => {
+      console.log('show me the results', data.data.results[0]);
+      this.loading = false;
+      for(let item of data.data?.results) {
+        let e: Event = {
+          id: item.id,
+          title: item.title,
+          start: item.start,
+          end: item.end,
+          thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
+        };
+        this.eventsService.addToEventsList(e);
+        console.log('show me the character', e);
+        //this.charactersList.push(character);
+      }
+      this.eventsList = this.eventsService.eventsArray;
+    })
   }
 
   goBack() {

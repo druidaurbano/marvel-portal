@@ -1,13 +1,13 @@
-<app-header (sendStep)="changeStep($event)"></app-header>
+<app-header (sendStep)="changeStep($event)" (callSearch)="searchStuff($event)"></app-header>
 
 <main *ngIf="step.name === 'home'"></main>
 
-<app-comics *ngIf="step.name === 'quadrinhos'"></app-comics>
+<app-comics *ngIf="step.name === 'quadrinhos'" [comicSearching]="search"></app-comics>
 
-<app-events *ngIf="step.name === 'eventos'"></app-events>
+<app-events *ngIf="step.name === 'eventos'" [eventSearching]="search"></app-events>
 
-<app-creators *ngIf="step.name === 'criadores'"></app-creators>
+<app-creators *ngIf="step.name === 'criadores'" [creatorSearching]="search"></app-creators>
 
-<app-characters *ngIf="step.name === 'personagens'"></app-characters>
+<app-characters *ngIf="step.name === 'personagens'" [characterSearching]="search"></app-characters>
 
 <app-details *ngIf="step.name === 'details'" [details]="details" (sendStep)="changeStep($event)"></app-details>

@@ -18,7 +18,8 @@
   </div>
 
   <div class="header-center">
-    <input type="text" placeholder="Search">
+    <input type="text" placeholder="Search" #searchInput (keydown.enter)="search(searchInput)">
+    <button class="center-button" (click)="search(searchInput)">Pesquisar</button>
   </div>
 
   <div class="header-right">
@@ -33,17 +34,5 @@
       <span class="profile-select">v</span>
     </button>
   </div>
-
-  <!-- <section class="profile-section">
-    <img src="../../../assets/no-profile.png" alt="profile image">
-  </section> -->
-
-  <!-- <section class="search-section">
-    <input type="text" placeholder="Search">
-  </section>
-
-  <section class="member-section">
-    <button>Seja Membro $</button>
-  </section> -->
 </div>
 

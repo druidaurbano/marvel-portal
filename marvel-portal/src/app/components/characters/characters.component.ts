@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Character } from 'src/app/models/character.model';
 import { Detail } from 'src/app/models/detail.model';
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
@@ -10,9 +10,10 @@ import { CharactersService } from 'src/app/services/characters.service';
   styleUrls: ['./characters.component.scss']
 })
 export class CharactersComponent {
+  @Input() characterSearching: any;
   charactersList: Array<Character> = [];
   characterStep: 'list' | 'details' = 'list';
-  character: any;
+  character: any = '';
   characterDetails: Detail = { type: 'character' };
   loading: boolean = false;
 
@@ -56,6 +57,15 @@ export class CharactersComponent {
 
   ngOnInit() {
     this.getCharacters();
+    //this.characterSearching = '';
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('show me the changes', changes)
+    if(changes['characterSearching'].currentValue)
+      this.searchCharacter(changes['characterSearching'].currentValue)
+    /* else if(changes['characterSearching'].currentValue == '')
+      this.getCharacters(); */
   }
 
   getCharacters(scroll?: boolean) {
@@ -116,6 +126,28 @@ export class CharactersComponent {
     };
     this.getCharacter(character.id);
     //this.router.navigate(['/details']);
+  }
+
+  searchCharacter(c: string) {
+    console.log('procurando por ... ', c);
+    this.charactersList = [];
+    this.charactersService.resetCharactersList();
+    this.loading = true;
+    this.apiMarvel.searchCharacters(c).subscribe((data: any) => {
+      console.log('show me the results', data.data.results[0]);
+      this.loading = false;
+      for(let item of data.data?.results) {
+        let character: Character = {
+          id: item.id,
+          name: item.name,
+          thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
+        };
+        this.charactersService.addToCharactersList(character);
+        console.log('show me the character', character);
+        //this.charactersList.push(character);
+      }
+      this.charactersList = this.charactersService.charactersArray;
+    })
   }
 
   goBack() {

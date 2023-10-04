@@ -83,4 +83,31 @@ export class ApiMarvelService {
     console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/events/${id}?&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
+
+  searchComics(search: string) {
+    console.log('searching for ...', search);
+    const md5 = new Md5();
+    this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
+    return this.http.get<any>(`${this.apiMarvelUrl}/comics?title=${search}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+  }
+
+  searchCharacters(search: string) {
+    console.log('searching for ...', search);
+    const md5 = new Md5();
+    this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
+    return this.http.get<any>(`${this.apiMarvelUrl}/characters?name=${search}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+  }
+
+  searchCreators(search: string) {
+    console.log('searching for ...', search);
+    const md5 = new Md5();
+    this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
+    return this.http.get<any>(`${this.apiMarvelUrl}/creators?firstName=${search}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+  }
+  searchEvents(search: string) {
+    console.log('searching for ...', search);
+    const md5 = new Md5();
+    this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
+    return this.http.get<any>(`${this.apiMarvelUrl}/events?name=${search}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+  }
 }

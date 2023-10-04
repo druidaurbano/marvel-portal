@@ -9,8 +9,10 @@ import { OptionButton } from 'src/app/models/optionButton.model';
 export class HeaderComponent implements OnInit {
 
   @Output() sendStep = new EventEmitter<any>();
+  @Output() callSearch = new EventEmitter<any>();
   homeButton: OptionButton = { name: 'home', id: 9 };
   leftSlide: number = 0;
+  actualStep: number = 9;
 
   buttonList: Array<OptionButton> = [
     { name: 'quadrinhos', id: 0 },
@@ -24,10 +26,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() { }
 
   goTo(item: OptionButton) {
     console.log('goTo clicado', item.name);
@@ -37,6 +36,7 @@ export class HeaderComponent implements OnInit {
     });
     this.unselectButton();
     this.selectButton(item.id);
+    this.actualStep = item.id;
   }
 
   /** Remove a classe do botão selecionado */
@@ -56,5 +56,13 @@ export class HeaderComponent implements OnInit {
     let mySlide = document.getElementById('slide');
     mySlide?.classList.add('selected');
     this.leftSlide = idButton * 25;
+  }
+
+  search(e: HTMLInputElement) {
+    console.log('buscando... ', e.value);
+    this.callSearch.emit({
+      text: e.value,
+      id: this.actualStep
+    });
   }
 }
