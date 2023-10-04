@@ -123,6 +123,7 @@ export class CreatorsComponent {
   }
 
   onScroll(): void {
-    this.getCreators(true)
+    if(this.creatorStep === 'list')
+      this.getCreators(true)
   }
 }

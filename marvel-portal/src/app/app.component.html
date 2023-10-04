@@ -2,7 +2,7 @@
 
 <main *ngIf="step.name === 'home'"></main>
 
-<app-comics *ngIf="step.name === 'quadrinhos'" (openDetailsComic)="openDetails($event)"></app-comics>
+<app-comics *ngIf="step.name === 'quadrinhos'"></app-comics>
 
 <app-events *ngIf="step.name === 'eventos'"></app-events>
 
@@ -11,5 +11,3 @@
 <app-characters *ngIf="step.name === 'personagens'"></app-characters>
 
 <app-details *ngIf="step.name === 'details'" [details]="details" (sendStep)="changeStep($event)"></app-details>
-
-<!-- <app-footer (sendStep)="changeStep($event)"></app-footer> -->

@@ -164,6 +164,7 @@ export class ComicsComponent {
   }
 
   onScroll(): void {
-    this.getComics(true)
+    if(this.comicStep === 'list')
+      this.getComics(true)
   }
 }

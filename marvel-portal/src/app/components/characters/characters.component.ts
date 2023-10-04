@@ -124,6 +124,7 @@ export class CharactersComponent {
   }
 
   onScroll(): void {
-    this.getCharacters(true)
+    if(this.characterStep === 'list')
+      this.getCharacters(true)
   }
 }

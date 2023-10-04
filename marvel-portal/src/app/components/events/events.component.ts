@@ -124,7 +124,8 @@ export class EventsComponent {
   }
 
   onScroll(): void {
-    this.getEvents(true)
+    if(this.eventStep === 'list')
+      this.getEvents(true)
   }
 
 }
