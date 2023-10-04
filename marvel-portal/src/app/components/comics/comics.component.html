@@ -1,4 +1,8 @@
-<div class="comics-container">
+<div class="comics-container"
+     infinite-scroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="1000"
+     (scrolled)="onScroll()">
   <ul *ngIf="comicStep === 'list'" class="comics-list">
     <li *ngFor="let comic of comicsList" class="comics-item" (click)="openComic(comic)">
       <button class="comics-button">

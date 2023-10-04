@@ -58,14 +58,14 @@ export class CreatorsComponent {
     this.getCreators();
   }
 
-  getCreators() {
+  getCreators(scroll?: boolean) {
     this.loading = true;
-    if(this.creatorsService.creatorsArray.length > 0) {
+    if(this.creatorsService.creatorsArray.length > 0 && !scroll) {
       this.creatorsList = this.creatorsService.creatorsArray;
       this.loading = false;
       return;
     }
-    this.apiMarvel.getCreators().subscribe((data: any) => {
+    this.apiMarvel.getCreators(this.creatorsList.length).subscribe((data: any) => {
       this.loading = false;
       console.log('show me the data inside events', data.data?.results);
       for(let item of data.data?.results) {
@@ -120,5 +120,9 @@ export class CreatorsComponent {
   goBack() {
     this.creatorStep = 'list';
     this.creator = {};
+  }
+
+  onScroll(): void {
+    this.getCreators(true)
   }
 }

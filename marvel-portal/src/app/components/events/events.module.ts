@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EventsComponent } from './events.component';
 import { DetailsModule } from '../details/details.module';
 import { LoadingModule } from '../loading/loading.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -11,7 +12,8 @@ import { LoadingModule } from '../loading/loading.module';
   imports: [
     CommonModule,
     DetailsModule,
-    LoadingModule
+    LoadingModule,
+    InfiniteScrollModule
   ],
   exports: [EventsComponent]
 })

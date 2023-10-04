@@ -1,4 +1,8 @@
-<div class="events-container">
+<div class="events-container"
+     infinite-scroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="1000"
+     (scrolled)="onScroll()">
   <ul *ngIf="eventStep === 'list'" class="events-list">
     <li *ngFor="let event of eventsList" class="events-item" (click)="openEvent(event)">
       <button class="events-button">

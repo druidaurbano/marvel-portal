@@ -20,35 +20,40 @@ export class ApiMarvelService {
     private http: HttpClient
   ) { }
 
-  getCharacters(): Observable<any[]> {
+  getCharacters(offset?: number): Observable<any[]> {
+    if(!offset)
+      offset = 0;
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
-    return this.http.get<any>(`${this.apiMarvelUrl}/characters?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+    return this.http.get<any>(`${this.apiMarvelUrl}/characters?limit=${this.limit}&offset=${offset}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
-  getComics(): Observable<any[]> {
+  getComics(offset?: number): Observable<any[]> {
+    if(!offset)
+      offset = 0;
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
-    return this.http.get<any>(`${this.apiMarvelUrl}/comics?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
-    /* this.http.get<any>(`${this.apiMarvelUrl}/comics?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`).subscribe((data: any) => {
-      for(let item of data.data)
-    }); */
+    return this.http.get<any>(`${this.apiMarvelUrl}/comics?limit=${this.limit}&ts=${this.ts}&offset=${offset}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
-  getCreators(): Observable<any[]> {
+  getCreators(offset?: number): Observable<any[]> {
+    if(!offset)
+      offset = 0;
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
-    return this.http.get<any>(`${this.apiMarvelUrl}/creators?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+    return this.http.get<any>(`${this.apiMarvelUrl}/creators?limit=${this.limit}&ts=${this.ts}&offset=${offset}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
-  getEvents(): Observable<any[]> {
+  getEvents(offset?: number): Observable<any[]> {
+    if(!offset)
+      offset = 0;
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
     console.log('show me the encrypted hash', this.hash);
-    return this.http.get<any>(`${this.apiMarvelUrl}/events?limit=${this.limit}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
+    return this.http.get<any>(`${this.apiMarvelUrl}/events?limit=${this.limit}&ts=${this.ts}&offset=${offset}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
   getComicById(id: number) {

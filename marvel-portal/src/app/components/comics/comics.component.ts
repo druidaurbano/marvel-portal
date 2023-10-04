@@ -106,19 +106,15 @@ export class ComicsComponent {
     this.getComics();
   }
 
-  getComics() {
+  getComics(scroll?: boolean) {
     this.loading = true;
-    console.log('length de copmicsList', this.comicsService.comicsArray.length);
-    if(this.comicsService.comicsArray.length > 0) {
+    if(this.comicsService.comicsArray.length > 0 && !scroll) {
       this.comicsList = this.comicsService.comicsArray;
       this.loading = false;
       return;
     }
-    this.apiMarvel.getComics().subscribe((data: any) => {
+    this.apiMarvel.getComics(this.comicsList.length).subscribe((data: any) => {
       this.loading = false;
-      //debugger;
-      console.log('show me the data inside comics component', data.data?.results);
-      console.log('show me the data results', data.results);
       for(let item of data.data?.results) {
         let comic: Comic = {
           id: item.id,
@@ -129,17 +125,10 @@ export class ComicsComponent {
         this.comicsService.addToComicsList(comic);
       }
       this.comicsList = this.comicsService.comicsArray;
-      console.log('show me data from Comics', data);
-      //console.log('show me the posts', this.posts);
     });
   }
 
   openComic(comic: any) {
-    console.log('comic clicada', comic);
-    /* this.openDetailsComic.emit({
-      type: 'comic',
-      element: comic
-    }); */
     this.comicStep = 'details';
     this.comicDetails = {
       type: 'comic',
@@ -147,7 +136,6 @@ export class ComicsComponent {
       title: comic.title
     };
     this.getComic(comic.id);
-    //this.router.navigate(['/details']);
   }
 
   getComic(id: number) {
@@ -173,5 +161,9 @@ export class ComicsComponent {
   goBack() {
     this.comicStep = 'list';
     this.comic = {};
+  }
+
+  onScroll(): void {
+    this.getComics(true)
   }
 }

@@ -1,4 +1,8 @@
-<div class="creators-container">
+<div class="creators-container"
+     infinite-scroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="1000"
+     (scrolled)="onScroll()">
   <ul *ngIf="creatorStep === 'list'" class="creators-list">
     <button *ngFor="let creator of creatorsList" class="creators-item" (click)="openCreator(creator)">
       <img src="{{creator.thumbnail}}" alt="" class="creators-thumbnail">

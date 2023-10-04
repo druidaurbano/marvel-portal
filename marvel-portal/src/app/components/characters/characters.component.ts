@@ -58,14 +58,14 @@ export class CharactersComponent {
     this.getCharacters();
   }
 
-  getCharacters() {
+  getCharacters(scroll?: boolean) {
     this.loading = true;
-    if(this.charactersService.charactersArray.length > 0) {
+    if(this.charactersService.charactersArray.length > 0 && !scroll) {
       this.charactersList = this.charactersService.charactersArray;
       this.loading = false;
       return;
     }
-    this.apiMarvel.getCharacters().subscribe((data: any) => {
+    this.apiMarvel.getCharacters(this.charactersList.length).subscribe((data: any) => {
       this.loading = false;
       console.log('show me the data inside comics component', data.data?.results);
       for(let item of data.data?.results) {
@@ -121,5 +121,9 @@ export class CharactersComponent {
   goBack() {
     this.characterStep = 'list';
     this.character = {};
+  }
+
+  onScroll(): void {
+    this.getCharacters(true)
   }
 }

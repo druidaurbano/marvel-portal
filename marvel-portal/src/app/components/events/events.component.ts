@@ -63,14 +63,14 @@ export class EventsComponent {
     this.getEvents();
   }
 
-  getEvents() {
+  getEvents(scroll?: boolean) {
     this.loading = true;
-    if(this.eventsService.eventsArray.length > 0) {
+    if(this.eventsService.eventsArray.length > 0 && !scroll) {
       this.eventsList = this.eventsService.eventsArray;
       this.loading = false;
       return;
     }
-    this.apiMarvel.getEvents().subscribe((data: any) => {
+    this.apiMarvel.getEvents(this.getEvents.length).subscribe((data: any) => {
       this.loading = false;
       console.log('show me the data inside events', data.data?.results);
       for(let item of data.data?.results) {
@@ -121,6 +121,10 @@ export class EventsComponent {
   goBack() {
     this.eventStep = 'list';
     this.event = {};
+  }
+
+  onScroll(): void {
+    this.getEvents(true)
   }
 
 }

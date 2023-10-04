@@ -1,4 +1,8 @@
-<div class="characters-container">
+<div class="characters-container"
+     infinite-scroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="1000"
+     (scrolled)="onScroll()">
   <ul *ngIf="characterStep === 'list'" class="characters-list">
     <button *ngFor="let character of charactersList" class="characters-item" (click)="openCharacter(character)">
       <img src="{{character.thumbnail}}" alt="" class="characters-thumbnail">

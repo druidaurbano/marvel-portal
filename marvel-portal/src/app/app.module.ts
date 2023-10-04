@@ -13,6 +13,7 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { DetailsModule } from './components/details/details.module';
 import { LoadingModule } from './components/loading/loading.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 registerLocaleData(localePT);
 
 @NgModule({
@@ -30,7 +31,8 @@ registerLocaleData(localePT);
     CharactersModule,
     HttpClientModule,
     DetailsModule,
-    LoadingModule
+    LoadingModule,
+    InfiniteScrollModule
   ],
   providers: [DatePipe, { provide: LOCALE_ID, useValue: 'pt-br'}],
   bootstrap: [AppComponent]
