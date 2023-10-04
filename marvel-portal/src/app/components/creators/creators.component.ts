@@ -2,6 +2,7 @@ import { ApiMarvelService } from 'src/app/services/api-marvel.service';
 import { Component } from '@angular/core';
 import { Creator } from 'src/app/models/creator.model';
 import { CreatorsService } from 'src/app/services/creators.service';
+import { Detail } from 'src/app/models/detail.model';
 
 @Component({
   selector: 'app-creators',
@@ -12,6 +13,7 @@ export class CreatorsComponent {
   creatorsList: Array<Creator> = [];
   creatorStep: 'list' | 'details' = 'list';
   creator: any;
+  creatorDetails: Detail = { type: 'creator'};
   loading: boolean = false;
 
   constructor(
@@ -84,11 +86,16 @@ export class CreatorsComponent {
     console.log('getting creator id:', id);
     //let comic = this.apiMarvel.getComicsById(id);
     this.apiMarvel.getCreatorById(id).subscribe((data: any) => {
-      console.log('show me the data from creator', data);
+      console.log('show me the data from creator', data.data.results[0]);
       let creator = data.data.results[0];
-      this.creator = {
+      let comicsArray  = [];
+      for (let item of creator.comics.items)
+        comicsArray.push(item.name);
+      this.creatorDetails = {
+        type: 'creator',
         thumbnail: `${creator.thumbnail.path}.${creator.thumbnail.extension}`,
-        title: creator.title
+        fullName: creator.fullName,
+        comics: comicsArray
       }
     });
     //console.log('show me the comic', comic);
@@ -101,6 +108,11 @@ export class CreatorsComponent {
       element: comic
     }); */
     this.creatorStep = 'details';
+    this.creatorDetails = {
+      type: 'creator',
+      thumbnail: creator.thumbnail,
+      title: creator.title
+    };
     this.getCreator(creator.id);
     //this.router.navigate(['/details']);
   }

@@ -46,7 +46,12 @@
   }
 }
 
-/* .app-looading {
+/* app-looading {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 140px);
 } */
+
+app-details {
+  height: calc(100vh - 170px);
+  display: flex;
+}

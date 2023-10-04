@@ -5,11 +5,11 @@
         <img src="{{event.thumbnail}}" alt="" class="events-thumbnail">
       </button>
       <span class="events-title">{{event.title}}</span>
-      <span class="events-year">{{event.start | date: 'mediumDate'}} - {{event.end | date: 'mediumDate'}}</span>
+      <span class="events-year">{{event.start | date: 'longDate'}} - {{event.end | date: 'longDate'}}</span>
     </li>
   </ul>
 
-  <app-details *ngIf="eventStep === 'details'" (changeStep)="goBack()" [details]="event"></app-details>
+  <app-details *ngIf="eventStep === 'details'" (changeStep)="goBack()" [details]="eventDetails"></app-details>
 
   <app-loading *ngIf="loading"></app-loading>
 </div>

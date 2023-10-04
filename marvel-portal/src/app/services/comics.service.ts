@@ -14,6 +14,10 @@ export class ComicsService {
     this.comicsArray.push(comic);
   }
 
+  formatComicDetail(comic: any) {
+
+  }
+
   resetComicsList() {
     this.comicsArray = [];
   }

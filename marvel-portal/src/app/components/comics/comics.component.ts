@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Comic } from 'src/app/models/comic.model';
+import { Detail } from 'src/app/models/detail.model';
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
 import { ComicsService } from 'src/app/services/comics.service';
 
@@ -16,6 +17,7 @@ export class ComicsComponent {
   comicsList: Array<Comic> = [];
   comicStep: 'list' | 'details' = 'list';
   comic: any;
+  comicDetails: Detail = { type: 'comic'};
   loading: boolean = false;
 
   constructor(
@@ -139,6 +141,11 @@ export class ComicsComponent {
       element: comic
     }); */
     this.comicStep = 'details';
+    this.comicDetails = {
+      type: 'comic',
+      thumbnail: comic.thumbnail,
+      title: comic.title
+    };
     this.getComic(comic.id);
     //this.router.navigate(['/details']);
   }
@@ -147,14 +154,20 @@ export class ComicsComponent {
     console.log('getting comic id:', id);
     //let comic = this.apiMarvel.getComicsById(id);
     this.apiMarvel.getComicById(id).subscribe((data: any) => {
-      console.log('show me the data from comic', data);
+      console.log('show me the data from comic', data.data.results[0]);
       let comic = data.data.results[0];
-      this.comic = {
+      let artistsArray  = [];
+      for (let item of comic.creators.items)
+        artistsArray.push(item.name);
+      this.comicDetails = {
+        type: 'comic',
         thumbnail: `${comic.thumbnail.path}.${comic.thumbnail.extension}`,
-        title: comic.title
+        title: comic.title,
+        date: comic.dates[1].date,
+        artists: artistsArray,
+        description:  comic.textObjects[0].text
       }
     });
-    //console.log('show me the comic', comic);
   }
 
   goBack() {

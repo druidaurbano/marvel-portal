@@ -1,36 +1,61 @@
 <div class="details-container">
 
-  <button class="go-back" (click)="goBack()">Go Back</button>
+  <button class="go-back" (click)="goBack()">Voltar</button>
 
   <section class="image-details-section">
     <img src="{{details.thumbnail}}">
   </section>
 
   <section class="text-details-section">
-    <span class="text-title">
+    <span *ngIf="details.type === 'comic' || 'event' || 'character'" class="text-title">
       {{details.title}}
     </span>
-
-    <span class="text-published">
-      <h3>Published:</h3>
-      <p>September 27, 2023</p>
+    <span *ngIf="details.type === 'creator'" class="text-title">
+      {{details.fullName}}
     </span>
 
-    <div class="text-writer-penciler">
-      <span class="text-writer">
-        <h3>Writer:</h3>
-        <p>Al Ewing</p>
-      </span>
-      <span class="text-penciler">
-        <h3>Penciler:</h3>
-        <p>Martin Coccolo</p>
-      </span>
+    <span *ngIf="details.type === 'comic'" class="text-published">
+      <h3>Publicada:</h3>
+      <p>{{details.date | date: 'mediumDate'}}</p>
+    </span>
+
+    <span *ngIf="details.type === 'event'" class="text-published">
+      <h3>Período da saga:</h3>
+      <p>{{details.start | date: 'mediumDate'}} - {{details.end | date: 'mediumDate'}}</p>
+    </span>
+
+    <div *ngIf="details.type === 'comic'" class="text-artists">
+      <h3>Artistas envolvidos:</h3>
+      <ul class="artists-list">
+        <span *ngFor="let artist of details.artists">
+          {{artist}}
+        </span>
+      </ul>
+    </div>
+
+    <div *ngIf="details.type === 'event'" class="text-characters">
+      <h3>Peronagens envolvidos:</h3>
+      <ul class="characters-list">
+        <span *ngFor="let character of details.characters">
+          {{character}}
+        </span>
+      </ul>
+    </div>
+
+    <div *ngIf="details.type === 'creator' || 'character'" class="text-comics">
+      <h3 *ngIf="details.type === 'creator'">Trabalhou nas seguintes hqs:</h3>
+      <h3 *ngIf="details.type === 'character'">Aparições em:</h3>
+      <ul class="comics-list">
+        <span *ngFor="let comic of details.comics">
+          {{comic}}
+        </span>
+      </ul>
     </div>
 
     <span class="text-sinopsis">
-      ORANOS WALKS THE EARTH! An Elder God of the Utgard-Realm had marked Thor for destruction - and a city with him. Yet the only power that could prevail carried its own terrible price. And all the while, Loki waited - Loki, who took no side and played no favorites...even if it be their own kin. This is the story of THE IMMORTAL THOR...and the hour of his greatest trial.
+      {{details.description}}
     </span>
 
-    <button class="button-variant">See variant covers -></button>
+    <!-- <button class="button-variant">See variant covers -></button> -->
   </section>
 </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Character } from 'src/app/models/character.model';
+import { Detail } from 'src/app/models/detail.model';
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
 import { CharactersService } from 'src/app/services/characters.service';
 
@@ -12,6 +13,7 @@ export class CharactersComponent {
   charactersList: Array<Character> = [];
   characterStep: 'list' | 'details' = 'list';
   character: any;
+  characterDetails: Detail = { type: 'character' };
   loading: boolean = false;
 
   constructor(
@@ -85,11 +87,16 @@ export class CharactersComponent {
     console.log('getting character id:', id);
     //let comic = this.apiMarvel.getComicsById(id);
     this.apiMarvel.getCharacterById(id).subscribe((data: any) => {
-      console.log('show me the data from character', data);
+      console.log('show me the data from character', data.data.results[0]);
       let character = data.data.results[0];
-      this.character = {
+      let comicsArray  = [];
+      for (let item of character.comics.items)
+        comicsArray.push(item.name);
+      this.characterDetails = {
+        type: 'character',
         thumbnail: `${character.thumbnail.path}.${character.thumbnail.extension}`,
-        title: character.title
+        title: character.name,
+        comics: comicsArray
       }
     });
     //console.log('show me the comic', comic);
@@ -102,6 +109,11 @@ export class CharactersComponent {
       element: comic
     }); */
     this.characterStep = 'details';
+    this.characterDetails = {
+      type: 'character',
+      thumbnail: character.thumbnail,
+      title: character.name
+    };
     this.getCharacter(character.id);
     //this.router.navigate(['/details']);
   }

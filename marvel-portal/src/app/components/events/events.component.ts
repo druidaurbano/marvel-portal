@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Detail } from 'src/app/models/detail.model';
 import { Event } from 'src/app/models/event.model';
 import { ApiMarvelService } from 'src/app/services/api-marvel.service';
 import { EventsService } from 'src/app/services/events.service';
@@ -12,6 +13,7 @@ export class EventsComponent {
   eventsList: Array<Event> = [];
   eventStep: 'list' | 'details' = 'list';
   event: any;
+  eventDetails: Detail = { type: 'event'};
   loading: boolean = false;
 
   constructor(
@@ -89,11 +91,18 @@ export class EventsComponent {
 
   getEvent(id: number) {
     this.apiMarvel.getEventById(id).subscribe((data: any) => {
-      console.log('show me the data from event', data);
+      console.log('show me the data from event', data.data.results[0]);
       let event = data.data.results[0];
-      this.event = {
+      let charactersArray  = [];
+      for (let item of event.characters.items)
+        charactersArray.push(item.name);
+      this.eventDetails = {
+        type: 'event',
         thumbnail: `${event.thumbnail.path}.${event.thumbnail.extension}`,
-        title: event.title
+        title: event.title,
+        start: event.start,
+        end: event.end,
+        characters: charactersArray
       }
     });
   }
@@ -101,6 +110,11 @@ export class EventsComponent {
   openEvent(event: any) {
     console.log('event clicado', event);
     this.eventStep = 'details';
+    this.eventDetails = {
+      type: 'event',
+      thumbnail: event.thumbnail,
+      title: event.title
+    }
     this.getEvent(event.id);
   }
 

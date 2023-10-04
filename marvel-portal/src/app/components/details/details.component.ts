@@ -10,7 +10,7 @@ import { ApiMarvelService } from 'src/app/services/api-marvel.service';
 export class DetailsComponent {
   @Input() details: any;
   @Output() changeStep = new EventEmitter<any>();
-  detail: Detail = {};
+  //detail: Detail = {};
 
   constructor(
     private apiMarvel: ApiMarvelService
