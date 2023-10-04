@@ -21,7 +21,7 @@
 
     <span *ngIf="details.type === 'event'" class="text-published">
       <h3>Período da saga:</h3>
-      <p>{{details.start | date: 'mediumDate'}} - {{details.end | date: 'mediumDate'}}</p>
+      <p>{{details.start | date: 'longDate'}} - {{details.end | date: 'longDate'}}</p>
     </span>
 
     <div *ngIf="details.type === 'comic'" class="text-artists">

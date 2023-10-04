@@ -27,6 +27,13 @@
       border: none;
       background: #EC1D24;
 
+      &:hover {
+        background: #FFFFFF;
+        .creators-name {
+        color: #EC1D24;
+        }
+      }
+
       .creators-thumbnail {
         width: 100%;
         height: 100%;
