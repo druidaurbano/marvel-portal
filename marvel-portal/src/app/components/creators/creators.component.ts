@@ -60,7 +60,6 @@ export class CreatorsComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('show me the changes', changes)
     if(changes['creatorSearching'].currentValue)
       this.searchCreator(changes['creatorSearching'].currentValue)
   }
@@ -74,7 +73,6 @@ export class CreatorsComponent {
     }
     this.apiMarvel.getCreators(this.creatorsList.length).subscribe((data: any) => {
       this.loading = false;
-      console.log('show me the data inside events', data.data?.results);
       for(let item of data.data?.results) {
         let creator: Creator = {
           id: item.id,
@@ -82,18 +80,13 @@ export class CreatorsComponent {
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
         }
         this.creatorsService.addToCreatorsList(creator);
-        console.log('show me the creator', creator);
-        //this.creatorsList.push(creator);
       }
       this.creatorsList = this.creatorsService.creatorsArray;
     });
   }
 
   getCreator(id: number) {
-    console.log('getting creator id:', id);
-    //let comic = this.apiMarvel.getComicsById(id);
     this.apiMarvel.getCreatorById(id).subscribe((data: any) => {
-      console.log('show me the data from creator', data.data.results[0]);
       let creator = data.data.results[0];
       let comicsArray  = [];
       for (let item of creator.comics.items)
@@ -105,15 +98,9 @@ export class CreatorsComponent {
         comics: comicsArray
       }
     });
-    //console.log('show me the comic', comic);
   }
 
   openCreator(creator: any) {
-    console.log('comic clicada', creator);
-    /* this.openDetailsComic.emit({
-      type: 'comic',
-      element: comic
-    }); */
     this.creatorStep = 'details';
     this.creatorDetails = {
       type: 'creator',
@@ -121,16 +108,13 @@ export class CreatorsComponent {
       title: creator.title
     };
     this.getCreator(creator.id);
-    //this.router.navigate(['/details']);
   }
 
   searchCreator(c: string) {
-    console.log('procurando por ... ', c);
     this.creatorsList = [];
     this.creatorsService.resetCreatorsList();
     this.loading = true;
     this.apiMarvel.searchCreators(c).subscribe((data: any) => {
-      console.log('show me the results', data.data.results[0]);
       this.loading = false;
       for(let item of data.data?.results) {
         let creator: Creator = {
@@ -139,8 +123,6 @@ export class CreatorsComponent {
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
         }
         this.creatorsService.addToCreatorsList(creator);
-        console.log('show me the character', creator);
-        //this.charactersList.push(character);
       }
       this.creatorsList = this.creatorsService.creatorsArray;
     })

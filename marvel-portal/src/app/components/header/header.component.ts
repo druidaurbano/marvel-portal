@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { OptionButton } from 'src/app/models/optionButton.model';
 
 @Component({
@@ -7,7 +7,7 @@ import { OptionButton } from 'src/app/models/optionButton.model';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  @ViewChild('searchInput') inputName: any;
   @Output() sendStep = new EventEmitter<any>();
   @Output() callSearch = new EventEmitter<any>();
   homeButton: OptionButton = { name: 'home', id: 9 };
@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
   buttonList: Array<OptionButton> = [
     { name: 'quadrinhos', id: 0 },
     { name: 'eventos', id: 1 },
-    //{ name: 'home', id: 3 },
     { name: 'criadores', id: 2 },
     { name: 'personagens', id: 3 },
   ];
@@ -29,7 +28,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() { }
 
   goTo(item: OptionButton) {
-    console.log('goTo clicado', item.name);
     this.sendStep.emit({
       event: event,
       step: item.name
@@ -59,7 +57,6 @@ export class HeaderComponent implements OnInit {
   }
 
   search(e: HTMLInputElement) {
-    console.log('buscando... ', e.value);
     this.callSearch.emit({
       text: e.value,
       id: this.actualStep

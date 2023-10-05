@@ -17,8 +17,6 @@
 
     .comics-item {
       width: 192px;
-      //max-width: 192px;
-      //height: 280px;
       list-style: none;
       display: flex;
       flex-direction: column;
@@ -51,11 +49,6 @@
     }
   }
 }
-
-/* app-looading {
-  width: 100vw;
-  height: calc(100vh - 140px);
-} */
 
 app-details {
   height: calc(100vh - 170px);

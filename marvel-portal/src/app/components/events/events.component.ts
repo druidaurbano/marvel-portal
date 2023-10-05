@@ -65,7 +65,6 @@ export class EventsComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('show me the changes', changes)
     if(changes['eventSearching'].currentValue)
       this.searchEvent(changes['eventSearching'].currentValue)
   }
@@ -79,7 +78,6 @@ export class EventsComponent {
     }
     this.apiMarvel.getEvents(this.getEvents.length).subscribe((data: any) => {
       this.loading = false;
-      console.log('show me the data inside events', data.data?.results);
       for(let item of data.data?.results) {
         let event: Event = {
           id: item.id,
@@ -89,8 +87,6 @@ export class EventsComponent {
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
         }
         this.eventsService.addToEventsList(event);
-        console.log('show me the event', event);
-        //this.eventsList.push(event);
       }
       this.eventsList = this.eventsService.eventsArray;
     });
@@ -98,7 +94,6 @@ export class EventsComponent {
 
   getEvent(id: number) {
     this.apiMarvel.getEventById(id).subscribe((data: any) => {
-      console.log('show me the data from event', data.data.results[0]);
       let event = data.data.results[0];
       let charactersArray  = [];
       for (let item of event.characters.items)
@@ -115,7 +110,6 @@ export class EventsComponent {
   }
 
   openEvent(event: any) {
-    console.log('event clicado', event);
     this.eventStep = 'details';
     this.eventDetails = {
       type: 'event',
@@ -126,12 +120,10 @@ export class EventsComponent {
   }
 
   searchEvent(event: string) {
-    console.log('procurando por ... ', event);
     this.eventsList = [];
     this.eventsService.resetEventsList();
     this.loading = true;
     this.apiMarvel.searchEvents(event).subscribe((data: any) => {
-      console.log('show me the results', data.data.results[0]);
       this.loading = false;
       for(let item of data.data?.results) {
         let e: Event = {
@@ -142,8 +134,6 @@ export class EventsComponent {
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
         };
         this.eventsService.addToEventsList(e);
-        console.log('show me the character', e);
-        //this.charactersList.push(character);
       }
       this.eventsList = this.eventsService.eventsArray;
     })

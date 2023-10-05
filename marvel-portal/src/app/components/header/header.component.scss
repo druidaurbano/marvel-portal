@@ -6,7 +6,6 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  //column-gap: 1%;
   background: #FFF;
 
   .header-left {
@@ -14,15 +13,9 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    //column-gap: 10%;
-
-    /* button {
-      padding: 0;
-    } */
 
     .home-button {
       width: 20%;
-      //margin-right: 10%;
       color: #000000;
       column-gap: 10%;
       img {
@@ -165,7 +158,3 @@
     }
   }
 }
-
-/* .selected {
-  color: #580B0E;
-} */

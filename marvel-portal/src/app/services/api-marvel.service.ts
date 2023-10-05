@@ -25,7 +25,6 @@ export class ApiMarvelService {
       offset = 0;
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
-    console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/characters?limit=${this.limit}&offset=${offset}&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
@@ -34,7 +33,6 @@ export class ApiMarvelService {
       offset = 0;
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
-    console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/comics?limit=${this.limit}&ts=${this.ts}&offset=${offset}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
@@ -43,7 +41,6 @@ export class ApiMarvelService {
       offset = 0;
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
-    console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/creators?limit=${this.limit}&ts=${this.ts}&offset=${offset}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
@@ -52,35 +49,30 @@ export class ApiMarvelService {
       offset = 0;
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
-    console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/events?limit=${this.limit}&ts=${this.ts}&offset=${offset}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
   getComicById(id: number) {
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
-    console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/comics/${id}?&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
   getCharacterById(id: number) {
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
-    console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/characters/${id}?&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
   getCreatorById(id: number) {
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
-    console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/creators/${id}?&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 
   getEventById(id: number) {
     const md5 = new Md5();
     this.hash = md5.appendStr(this.ts+this.privateKey+this.publicKey).end();
-    console.log('show me the encrypted hash', this.hash);
     return this.http.get<any>(`${this.apiMarvelUrl}/events/${id}?&ts=${this.ts}&apikey=${this.publicKey}&hash=${this.hash}`)
   }
 

@@ -1,6 +1,5 @@
 .events-container {
   width: 100%;
-  //max-width: 1920px;
   height: 100%;
   padding: 30px;
   background: rgba(0, 0, 0, .9);
@@ -18,8 +17,6 @@
 
     .events-item {
       width: 192px;
-      //max-width: 192px;
-      //height: 280px;
       list-style: none;
       display: flex;
       flex-direction: column;

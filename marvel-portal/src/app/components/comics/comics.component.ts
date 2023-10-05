@@ -1,5 +1,5 @@
 //import { DatePipe, formatDate } from '@angular/common';
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Comic } from 'src/app/models/comic.model';
@@ -25,7 +25,6 @@ export class ComicsComponent {
     private apiMarvel: ApiMarvelService,
     private router: Router,
     private comicsService: ComicsService
-    //public datePipe: DatePipe
   ) {
     /* this.comicsList = [
       {
@@ -108,7 +107,6 @@ export class ComicsComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('show me the changes', changes)
     if(changes['comicSearching'].currentValue)
       this.searchComic(changes['comicSearching'].currentValue)
   }
@@ -146,10 +144,7 @@ export class ComicsComponent {
   }
 
   getComic(id: number) {
-    console.log('getting comic id:', id);
-    //let comic = this.apiMarvel.getComicsById(id);
     this.apiMarvel.getComicById(id).subscribe((data: any) => {
-      console.log('show me the data from comic', data.data.results[0]);
       let comic = data.data.results[0];
       let artistsArray  = [];
       for (let item of comic.creators.items)
@@ -166,12 +161,10 @@ export class ComicsComponent {
   }
 
   searchComic(c: string) {
-    console.log('procurando por ... ', c);
     this.comicsList = [];
     this.comicsService.resetComicsList();
     this.loading = true;
     this.apiMarvel.searchComics(c).subscribe((data: any) => {
-      console.log('show me the results', data.data.results[0]);
       this.loading = false;
       for(let item of data.data?.results) {
         let comic: Comic = {
@@ -181,8 +174,6 @@ export class ComicsComponent {
           date: item.title.match(/\(\d{4}\)/)
         };
         this.comicsService.addToComicsList(comic);
-        console.log('show me the character', comic);
-        //this.charactersList.push(character);
       }
       this.comicsList = this.comicsService.comicsArray;
     })

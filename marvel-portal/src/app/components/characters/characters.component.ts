@@ -57,15 +57,11 @@ export class CharactersComponent {
 
   ngOnInit() {
     this.getCharacters();
-    //this.characterSearching = '';
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('show me the changes', changes)
     if(changes['characterSearching'].currentValue)
       this.searchCharacter(changes['characterSearching'].currentValue)
-    /* else if(changes['characterSearching'].currentValue == '')
-      this.getCharacters(); */
   }
 
   getCharacters(scroll?: boolean) {
@@ -77,7 +73,6 @@ export class CharactersComponent {
     }
     this.apiMarvel.getCharacters(this.charactersList.length).subscribe((data: any) => {
       this.loading = false;
-      console.log('show me the data inside comics component', data.data?.results);
       for(let item of data.data?.results) {
         let character: Character = {
           id: item.id,
@@ -85,19 +80,13 @@ export class CharactersComponent {
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
         };
         this.charactersService.addToCharactersList(character);
-        console.log('show me the character', character);
-        //this.charactersList.push(character);
       }
       this.charactersList = this.charactersService.charactersArray;
-      //console.log('show me the posts', this.posts);
     });
   }
 
   getCharacter(id: number) {
-    console.log('getting character id:', id);
-    //let comic = this.apiMarvel.getComicsById(id);
     this.apiMarvel.getCharacterById(id).subscribe((data: any) => {
-      console.log('show me the data from character', data.data.results[0]);
       let character = data.data.results[0];
       let comicsArray  = [];
       for (let item of character.comics.items)
@@ -109,15 +98,9 @@ export class CharactersComponent {
         comics: comicsArray
       }
     });
-    //console.log('show me the comic', comic);
   }
 
   openCharacter(character: any) {
-    console.log('character clicada', character);
-    /* this.openDetailsComic.emit({
-      type: 'comic',
-      element: comic
-    }); */
     this.characterStep = 'details';
     this.characterDetails = {
       type: 'character',
@@ -125,16 +108,13 @@ export class CharactersComponent {
       title: character.name
     };
     this.getCharacter(character.id);
-    //this.router.navigate(['/details']);
   }
 
   searchCharacter(c: string) {
-    console.log('procurando por ... ', c);
     this.charactersList = [];
     this.charactersService.resetCharactersList();
     this.loading = true;
     this.apiMarvel.searchCharacters(c).subscribe((data: any) => {
-      console.log('show me the results', data.data.results[0]);
       this.loading = false;
       for(let item of data.data?.results) {
         let character: Character = {
@@ -143,8 +123,6 @@ export class CharactersComponent {
           thumbnail: `${item.thumbnail.path}.${item.thumbnail.extension}`
         };
         this.charactersService.addToCharactersList(character);
-        console.log('show me the character', character);
-        //this.charactersList.push(character);
       }
       this.charactersList = this.charactersService.charactersArray;
     })

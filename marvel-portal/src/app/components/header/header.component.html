@@ -18,7 +18,11 @@
   </div>
 
   <div class="header-center">
-    <input type="text" placeholder="Search" #searchInput (keydown.enter)="search(searchInput)">
+    <input type="text"
+           placeholder="Search"
+           #searchInput
+           id="search-input"
+           (keydown.enter)="search(searchInput)">
     <button class="center-button" (click)="search(searchInput)">Pesquisar</button>
   </div>
 

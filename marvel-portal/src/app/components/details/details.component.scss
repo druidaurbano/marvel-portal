@@ -5,7 +5,6 @@
   padding: 2% 20%;
   column-gap: 2%;
   position: relative;
-  //background-color: rebeccapurple;
 
   h3 {
     margin: 0;
@@ -58,7 +57,6 @@
     }
     .text-artists, .text-characters, .text-comics {
       display: flex;
-      //justify-content: space-between;
       flex-direction: column;
       row-gap: 5px;
       h3 {
@@ -75,10 +73,5 @@
         }
       }
     }
-
-    /* .button-variant {
-      width: 150px;
-      padding: 0;
-    } */
   }
 }

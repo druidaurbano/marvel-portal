@@ -20,10 +20,6 @@
 .loading-container {
   width: 100%;
   height: calc(100vh - 140px);;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  //height: 100vh;
 
   .loading-spin {
     width: 100px;
@@ -32,7 +28,6 @@
     position: absolute;
     top: calc(50% - 50px);
     left: calc(50% - 50px);
-    //margin: 110px auto 0;
     border:solid 10px #580B0E;
     border-radius: 50%;
     border-right-color: transparent;
