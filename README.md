@@ -9,3 +9,7 @@ Aplicação de um portal com informações da Marvel
     - ng serve (para rodar a aplicação, após isso ela estará disponível para ser acessada em "localhost:4200")
 
     - Angular versão 16
+
+* Instalação bibliotecas
+    - após a instalação do Angular e do node então instalar as bibliotecas
+        `npm install`
